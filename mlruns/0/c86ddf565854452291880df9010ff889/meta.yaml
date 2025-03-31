@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/ziovi/fraud_detection/mlruns/0/c86ddf565854452291880df9010ff889/artifacts
+end_time: 1742899131943
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: c86ddf565854452291880df9010ff889
+run_name: languid-bear-204
+run_uuid: c86ddf565854452291880df9010ff889
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742899131850
+status: 3
+tags: []
+user_id: ziovi

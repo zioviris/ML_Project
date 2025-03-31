@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/ziovi/fraud_detection/mlruns/0/7dc22cb4ffc94912a6bb8336c7f9f5e5/artifacts
+end_time: 1742758781241
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 7dc22cb4ffc94912a6bb8336c7f9f5e5
+run_name: rogue-stag-156
+run_uuid: 7dc22cb4ffc94912a6bb8336c7f9f5e5
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742756784759
+status: 3
+tags: []
+user_id: ziovi

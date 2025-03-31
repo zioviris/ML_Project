@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/ziovi/fraud_detection/mlruns/0/a29c715082ff4747964e4e4efb827c82/artifacts
+end_time: 1742898357873
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: a29c715082ff4747964e4e4efb827c82
+run_name: caring-kite-522
+run_uuid: a29c715082ff4747964e4e4efb827c82
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742898357839
+status: 3
+tags: []
+user_id: ziovi

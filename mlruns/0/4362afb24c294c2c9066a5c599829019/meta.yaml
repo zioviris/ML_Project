@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/ziovi/fraud_detection/mlruns/0/4362afb24c294c2c9066a5c599829019/artifacts
+end_time: 1743325407320
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 4362afb24c294c2c9066a5c599829019
+run_name: lyrical-horse-435
+run_uuid: 4362afb24c294c2c9066a5c599829019
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1743325407280
+status: 3
+tags: []
+user_id: ziovi

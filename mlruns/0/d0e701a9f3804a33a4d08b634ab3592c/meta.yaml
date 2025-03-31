@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/ziovi/fraud_detection/mlruns/0/d0e701a9f3804a33a4d08b634ab3592c/artifacts
+end_time: 1742899576277
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: d0e701a9f3804a33a4d08b634ab3592c
+run_name: sedate-hen-938
+run_uuid: d0e701a9f3804a33a4d08b634ab3592c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742899576201
+status: 3
+tags: []
+user_id: ziovi

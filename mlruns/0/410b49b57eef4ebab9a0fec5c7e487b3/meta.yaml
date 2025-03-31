@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/ziovi/fraud_detection/mlruns/0/410b49b57eef4ebab9a0fec5c7e487b3/artifacts
+end_time: 1742900643442
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 410b49b57eef4ebab9a0fec5c7e487b3
+run_name: clean-skunk-398
+run_uuid: 410b49b57eef4ebab9a0fec5c7e487b3
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742900643430
+status: 3
+tags: []
+user_id: ziovi

@@ -1,0 +1,62 @@
+from fastapi import FastAPI, BackgroundTasks
+import sqlite3
+import pandas as pd
+from celery_worker import add
+from celery.result import AsyncResult
+from pydantic import BaseModel
+from tasks import train_model_and_log 
+
+app = FastAPI()
+
+DATABASE_PATH = "data/creditcard_fraud.db"
+
+def query_db(query: str):
+    """Helper function to execute SQL queries and return results as DataFrame."""
+    conn = sqlite3.connect(DATABASE_PATH)
+    df = pd.read_sql_query(query, conn)
+    conn.close()
+    return df
+
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to the Credit Card Fraud API"}
+
+@app.get("/transactions")
+def get_all_transactions():
+    df = query_db("SELECT * FROM transactions LIMIT 100")  # Limit to avoid large responses
+    return df.to_dict(orient="records")
+
+@app.get("/transaction/{transaction_id}")
+def get_transaction(transaction_id: int):
+    df = query_db(f"SELECT * FROM transactions WHERE rowid = {transaction_id}")
+    if df.empty:
+        return {"error": "Transaction not found"}
+    return df.to_dict(orient="records")[0]
+
+@app.get("/fraud-transactions")
+def get_fraud_transactions():
+    df = query_db("SELECT * FROM transactions WHERE Class = 1 LIMIT 100")
+    return df.to_dict(orient="records")
+
+@app.get("/add-task/")  # For testing basic Celery task
+def add_task(x: int, y: int):
+    task = add.delay(x, y)
+    return {"task_id": task.id, "status": "Task submitted!"}
+
+class TrainRequest(BaseModel):
+    model_type: str  # Expecting 'random_forest', 'logistic_regression', or 'svm'
+
+@app.post("/train_model")
+async def train_model(model_type: str):
+    """Trigger model training in Celery."""
+    if model_type not in ["random_forest", "logistic_regression", "svm"]:
+        return {"error": "Invalid model type"}
+    
+    task = train_model_and_log.apply_async(args=[model_type])
+    return {"task_id": task.id, "message": f"Training started for {model_type}"}
+
+@app.get("/status/{task_id}")
+async def get_status(task_id: str):
+    """Check the status of a Celery task."""
+    result = AsyncResult(task_id)
+    return {"task_id": task_id, "status": result.status}

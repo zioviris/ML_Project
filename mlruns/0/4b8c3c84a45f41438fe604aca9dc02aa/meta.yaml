@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/ziovi/fraud_detection/mlruns/0/4b8c3c84a45f41438fe604aca9dc02aa/artifacts
+end_time: 1742900468256
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 4b8c3c84a45f41438fe604aca9dc02aa
+run_name: delightful-goose-888
+run_uuid: 4b8c3c84a45f41438fe604aca9dc02aa
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742900468223
+status: 3
+tags: []
+user_id: ziovi

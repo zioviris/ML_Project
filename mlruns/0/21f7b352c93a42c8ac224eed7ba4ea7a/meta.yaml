@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/ziovi/fraud_detection/mlruns/0/21f7b352c93a42c8ac224eed7ba4ea7a/artifacts
+end_time: 1742756504034
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 21f7b352c93a42c8ac224eed7ba4ea7a
+run_name: sneaky-ant-809
+run_uuid: 21f7b352c93a42c8ac224eed7ba4ea7a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742747804177
+status: 3
+tags: []
+user_id: ziovi

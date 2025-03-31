@@ -1,0 +1,59 @@
+#version: "3.8"
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"   # RabbitMQ messaging port
+      - "15672:15672" # Web UI for monitoring
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+
+  # redis:
+  #   image: "redis:latest"
+  #   container_name: "redis"
+  #   ports:
+  #     - "6379:6379"
+
+  flower:
+    image: mher/flower
+    container_name: flower
+    depends_on:
+      - rabbitmq
+    ports:
+      - "5555:5555"
+    environment:
+      - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
+
+
+  backend:
+    build: .
+    container_name: "backend"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - rabbitmq
+      - mlflow
+    environment:
+      - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+
+  celery_worker:
+    build: .
+    container_name: "celery_worker"
+    command: ["celery", "-A", "tasks", "worker", "--loglevel=info"]
+    depends_on:
+      - rabbitmq
+
+    environment:
+      - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
+
+  mlflow:
+    build: ./mlflow
+    container_name: "mlflow"
+    ports:
+      - "5000:5000"
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow:5000

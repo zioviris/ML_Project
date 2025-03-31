@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/ziovi/fraud_detection/mlruns/0/de165d4c33aa4b92b6b3166824b97364/artifacts
+end_time: 1742744960236
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: de165d4c33aa4b92b6b3166824b97364
+run_name: rumbling-cub-859
+run_uuid: de165d4c33aa4b92b6b3166824b97364
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742744481478
+status: 3
+tags: []
+user_id: ziovi

@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/ziovi/fraud_detection/mlruns/0/da09d519f16b45eebf60e240a848bc3a/artifacts
+end_time: 1742759120632
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: da09d519f16b45eebf60e240a848bc3a
+run_name: carefree-pug-488
+run_uuid: da09d519f16b45eebf60e240a848bc3a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742758785428
+status: 3
+tags: []
+user_id: ziovi

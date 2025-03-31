@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/ziovi/fraud_detection/mlruns/0/b50916a51af34c80a4eb877aa716ca63/artifacts
+end_time: 1742745556887
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: b50916a51af34c80a4eb877aa716ca63
+run_name: suave-yak-912
+run_uuid: b50916a51af34c80a4eb877aa716ca63
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742745283427
+status: 3
+tags: []
+user_id: ziovi

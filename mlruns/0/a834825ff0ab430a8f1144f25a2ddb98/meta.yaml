@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/ziovi/fraud_detection/mlruns/0/a834825ff0ab430a8f1144f25a2ddb98/artifacts
+end_time: 1742759413432
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: a834825ff0ab430a8f1144f25a2ddb98
+run_name: mercurial-wren-843
+run_uuid: a834825ff0ab430a8f1144f25a2ddb98
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742759124830
+status: 3
+tags: []
+user_id: ziovi
