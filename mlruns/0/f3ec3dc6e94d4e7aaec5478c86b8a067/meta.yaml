@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/ziovi/fraud_detection/mlruns/0/f3ec3dc6e94d4e7aaec5478c86b8a067/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: f3ec3dc6e94d4e7aaec5478c86b8a067
+run_name: exultant-pig-704
+run_uuid: f3ec3dc6e94d4e7aaec5478c86b8a067
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1743930863102
+status: 1
+tags: []
+user_id: ziovi
