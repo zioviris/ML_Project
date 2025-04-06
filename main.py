@@ -5,6 +5,7 @@ from celery_worker import add
 from celery.result import AsyncResult
 from pydantic import BaseModel
 from tasks import train_model_and_log 
+from tasks import test_mlflow_log
 
 app = FastAPI()
 
@@ -52,11 +53,36 @@ async def train_model(model_type: str):
     if model_type not in ["random_forest", "logistic_regression", "svm"]:
         return {"error": "Invalid model type"}
     
+    # Start the task asynchronously in Celery
     task = train_model_and_log.apply_async(args=[model_type])
+    
+    # Return the task ID and the model type to track the training
     return {"task_id": task.id, "message": f"Training started for {model_type}"}
 
 @app.get("/status/{task_id}")
 async def get_status(task_id: str):
-    """Check the status of a Celery task."""
+    """Check the status of a Celery task and fetch model metrics if completed."""
     result = AsyncResult(task_id)
-    return {"task_id": task_id, "status": result.status}
+
+    # If the task is complete, fetch the results (including metrics)
+    if result.status == "SUCCESS":
+        task_result = result.result
+        if isinstance(task_result, dict) and 'metrics' in task_result:
+            return {
+                "task_id": task_id,
+                "status": result.status,
+                "metrics": task_result["metrics"]
+            }
+        else:
+            return {
+                "task_id": task_id,
+                "status": result.status,
+                "message": "Training completed without logging metrics."
+            }
+    else:
+        return {"task_id": task_id, "status": result.status}
+
+@app.get("/test-mlflow")
+def test_mlflow_endpoint():
+    task = test_mlflow_log.delay()
+    return {"task_id": task.id, "message": "Dummy MLflow log task submitted"}

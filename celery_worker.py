@@ -1,5 +1,5 @@
 from celery import Celery
-from tasks import train_model_and_log
+
 
 celery_app = Celery(
     "tasks",
