@@ -1,0 +1,15 @@
+artifact_uri: file:///C:\Users\ziovi\fraud_detection\mlruns/505413422099683134/2bdc3d171f7545069465aa8f53544e3d/artifacts
+end_time: 1744106812364
+entry_point_name: ''
+experiment_id: '505413422099683134'
+lifecycle_stage: active
+run_id: 2bdc3d171f7545069465aa8f53544e3d
+run_name: welcoming-conch-445
+run_uuid: 2bdc3d171f7545069465aa8f53544e3d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1744102170797
+status: 3
+tags: []
+user_id: ziovi

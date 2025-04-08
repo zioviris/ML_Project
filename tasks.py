@@ -1,3 +1,6 @@
+import eventlet
+eventlet.monkey_patch()
+
 from celery import Celery
 from models import get_model
 from database import Database
@@ -36,7 +39,7 @@ def train_model_and_log(model_type, query="SELECT * FROM transactions"):
 
     # Train and log model using MLflow
     try:
-        model.log_model_to_mlflow(X_train, y_train, X_test, y_test, model_type)  # Pass X and y for both training and evaluation
+        model.log_model_to_mlflow(X_train, y_train, X_test, y_test, model_type) 
         logger.info(f"Training completed for {model_type}. Metrics logged to MLflow.")
     except Exception as e:
         logger.error(f"Error during training or logging for model {model_type}: {e}")

@@ -1,0 +1,15 @@
+artifact_uri: file:///C:\Users\ziovi\fraud_detection\mlruns/505413422099683134/fcb2c80f437a47edaca6f52889a843e4/artifacts
+end_time: 1744108265455
+entry_point_name: ''
+experiment_id: '505413422099683134'
+lifecycle_stage: active
+run_id: fcb2c80f437a47edaca6f52889a843e4
+run_name: whimsical-quail-276
+run_uuid: fcb2c80f437a47edaca6f52889a843e4
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1744107135642
+status: 3
+tags: []
+user_id: ziovi
