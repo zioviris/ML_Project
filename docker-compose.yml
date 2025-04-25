@@ -43,7 +43,7 @@ services:
   celery_worker:
     build: .
     container_name: "celery_worker"
-    command: ["celery", "-A", "tasks", "worker", "--loglevel=info"]
+    command: ["celery", "-A", "tasks", "worker", "--loglevel=debug --pool=eventlet -E"]
     depends_on:
       - rabbitmq
 

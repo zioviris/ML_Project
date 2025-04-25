@@ -12,7 +12,7 @@ from sklearn.model_selection import train_test_split
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-app = Celery('tasks', broker='pyamqp://guest@localhost//')
+app = Celery('tasks', broker= "amqp://guest:guest@localhost:5672//")
 
 @app.task
 def train_model_and_log(model_type, query="SELECT * FROM transactions"):
@@ -39,6 +39,7 @@ def train_model_and_log(model_type, query="SELECT * FROM transactions"):
 
     # Train and log model using MLflow
     try:
+        metrics = model.log_model_to_mlflow(X_train, y_train, X_test, y_test, model_type)
         model.log_model_to_mlflow(X_train, y_train, X_test, y_test, model_type) 
         logger.info(f"Training completed for {model_type}. Metrics logged to MLflow.")
     except Exception as e:
@@ -46,6 +47,7 @@ def train_model_and_log(model_type, query="SELECT * FROM transactions"):
         return {"error": str(e)}
 
     logger.info(f"Completed task for {model_type}.")
+    return {"status": "completed", "model_type": model_type, "metrics": metrics}
 
 @app.task
 def test_mlflow_log():

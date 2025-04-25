@@ -6,7 +6,7 @@ from celery import Celery
 
 celery_app = Celery(
     "tasks",
-    broker="pyamqp://guest@localhost//",
+    broker= "amqp://guest:guest@localhost:5672//",
     backend="rpc://",
 )
 
