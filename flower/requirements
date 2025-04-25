@@ -1,3 +1,4 @@
 mlflow
 rabbitmq
 celery
+eventlet
