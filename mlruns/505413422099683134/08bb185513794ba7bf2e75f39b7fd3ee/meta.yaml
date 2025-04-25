@@ -1,0 +1,15 @@
+artifact_uri: file:///C:\Users\ziovi\fraud_detection\mlruns/505413422099683134/08bb185513794ba7bf2e75f39b7fd3ee/artifacts
+end_time: 1745567306420
+entry_point_name: ''
+experiment_id: '505413422099683134'
+lifecycle_stage: active
+run_id: 08bb185513794ba7bf2e75f39b7fd3ee
+run_name: illustrious-bear-937
+run_uuid: 08bb185513794ba7bf2e75f39b7fd3ee
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1745567287510
+status: 3
+tags: []
+user_id: ziovi
