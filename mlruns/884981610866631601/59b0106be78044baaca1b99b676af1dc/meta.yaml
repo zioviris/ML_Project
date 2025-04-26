@@ -1,0 +1,15 @@
+artifact_uri: file:///C:\Users\ziovi\fraud_detection\mlruns/884981610866631601/59b0106be78044baaca1b99b676af1dc/artifacts
+end_time: 1745619760957
+entry_point_name: ''
+experiment_id: '884981610866631601'
+lifecycle_stage: active
+run_id: 59b0106be78044baaca1b99b676af1dc
+run_name: blushing-finch-897
+run_uuid: 59b0106be78044baaca1b99b676af1dc
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1745619742817
+status: 3
+tags: []
+user_id: ziovi

@@ -1,0 +1,15 @@
+artifact_uri: file:///C:\Users\ziovi\fraud_detection\mlruns/884981610866631601/a97345fef58040418cb05a66ab500acf/artifacts
+end_time: 1745622440620
+entry_point_name: ''
+experiment_id: '884981610866631601'
+lifecycle_stage: active
+run_id: a97345fef58040418cb05a66ab500acf
+run_name: sassy-slug-768
+run_uuid: a97345fef58040418cb05a66ab500acf
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1745622417851
+status: 3
+tags: []
+user_id: ziovi

@@ -1,0 +1,15 @@
+artifact_uri: file:///C:\Users\ziovi\fraud_detection\mlruns/884981610866631601/ed7811a97dee414993b74b5912541dd3/artifacts
+end_time: 1745619630188
+entry_point_name: ''
+experiment_id: '884981610866631601'
+lifecycle_stage: active
+run_id: ed7811a97dee414993b74b5912541dd3
+run_name: charming-moose-77
+run_uuid: ed7811a97dee414993b74b5912541dd3
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1745619613008
+status: 3
+tags: []
+user_id: ziovi

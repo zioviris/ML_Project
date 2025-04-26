@@ -112,3 +112,41 @@
 2025-04-25 21:39:16,599 - fraud_detection - INFO - Database initialized with path: data/creditcard_fraud.db
 2025-04-25 21:39:16,599 - fraud_detection - INFO - Fetching data with query: SELECT * FROM transactions
 2025-04-25 21:39:20,045 - fraud_detection - INFO - Fetched 284807 rows successfully.
+2025-04-26 01:19:05,232 - fraud_detection - INFO - Database initialized with path: data/creditcard_fraud.db
+2025-04-26 01:19:05,232 - fraud_detection - INFO - Fetching data with query: SELECT * FROM transactions
+2025-04-26 01:19:07,767 - fraud_detection - ERROR - Unexpected error: <class 'celery.concurrency.solo.TaskPool'> does not implement kill_job
+2025-04-26 01:19:07,775 - fraud_detection - INFO - Database initialized with path: data/creditcard_fraud.db
+2025-04-26 01:19:07,775 - fraud_detection - INFO - Fetching data with query: SELECT * FROM transactions
+2025-04-26 01:19:10,725 - fraud_detection - INFO - Fetched 284807 rows successfully.
+2025-04-26 01:19:52,318 - fraud_detection - INFO - Database initialized with path: data/creditcard_fraud.db
+2025-04-26 01:19:52,318 - fraud_detection - INFO - Fetching data with query: SELECT * FROM transactions
+2025-04-26 01:19:54,916 - fraud_detection - INFO - Fetched 284807 rows successfully.
+2025-04-26 01:20:30,200 - fraud_detection - INFO - Database initialized with path: data/creditcard_fraud.db
+2025-04-26 01:20:30,207 - fraud_detection - INFO - Fetching data with query: SELECT * FROM transactions
+2025-04-26 01:20:32,816 - fraud_detection - INFO - Fetched 284807 rows successfully.
+2025-04-26 01:21:16,083 - fraud_detection - INFO - Database initialized with path: data/creditcard_fraud.db
+2025-04-26 01:21:16,084 - fraud_detection - INFO - Fetching data with query: SELECT * FROM transactions
+2025-04-26 01:21:18,753 - fraud_detection - INFO - Fetched 284807 rows successfully.
+2025-04-26 01:22:01,712 - fraud_detection - INFO - Database initialized with path: data/creditcard_fraud.db
+2025-04-26 01:22:01,712 - fraud_detection - INFO - Fetching data with query: SELECT * FROM transactions
+2025-04-26 01:22:04,323 - fraud_detection - INFO - Fetched 284807 rows successfully.
+2025-04-26 01:22:40,978 - fraud_detection - INFO - Database initialized with path: data/creditcard_fraud.db
+2025-04-26 01:22:40,978 - fraud_detection - INFO - Fetching data with query: SELECT * FROM transactions
+2025-04-26 01:22:43,605 - fraud_detection - INFO - Fetched 284807 rows successfully.
+2025-04-26 01:23:21,896 - fraud_detection - INFO - Database initialized with path: data/creditcard_fraud.db
+2025-04-26 01:23:21,896 - fraud_detection - INFO - Fetching data with query: SELECT * FROM transactions
+2025-04-26 01:23:24,504 - fraud_detection - INFO - Fetched 284807 rows successfully.
+2025-04-26 01:46:28,666 - fraud_detection - INFO - Database initialized with path: data/creditcard_fraud.db
+2025-04-26 01:46:28,666 - fraud_detection - INFO - Fetching data with query: SELECT * FROM transactions
+2025-04-26 01:47:32,902 - fraud_detection - INFO - Database initialized with path: data/creditcard_fraud.db
+2025-04-26 01:47:32,902 - fraud_detection - INFO - Fetching data with query: SELECT * FROM transactions
+2025-04-26 01:47:35,824 - fraud_detection - INFO - Fetched 284807 rows successfully.
+2025-04-26 02:06:37,301 - fraud_detection - INFO - Database initialized with path: data/creditcard_fraud.db
+2025-04-26 02:06:37,302 - fraud_detection - INFO - Fetching data with query: SELECT * FROM transactions
+2025-04-26 02:06:39,713 - fraud_detection - INFO - Fetched 284807 rows successfully.
+2025-04-26 02:07:20,641 - fraud_detection - INFO - Database initialized with path: data/creditcard_fraud.db
+2025-04-26 02:07:20,642 - fraud_detection - INFO - Fetching data with query: SELECT * FROM transactions
+2025-04-26 02:07:23,104 - fraud_detection - INFO - Fetched 284807 rows successfully.
+2025-04-26 02:13:54,050 - fraud_detection - INFO - Database initialized with path: data/creditcard_fraud.db
+2025-04-26 02:13:54,051 - fraud_detection - INFO - Fetching data with query: SELECT * FROM transactions
+2025-04-26 02:13:56,791 - fraud_detection - INFO - Fetched 284807 rows successfully.

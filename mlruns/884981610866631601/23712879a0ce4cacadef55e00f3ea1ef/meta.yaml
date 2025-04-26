@@ -1,0 +1,15 @@
+artifact_uri: file:///C:\Users\ziovi\fraud_detection\mlruns/884981610866631601/23712879a0ce4cacadef55e00f3ea1ef/artifacts
+end_time: 1745622458219
+entry_point_name: ''
+experiment_id: '884981610866631601'
+lifecycle_stage: active
+run_id: 23712879a0ce4cacadef55e00f3ea1ef
+run_name: thoughtful-crane-191
+run_uuid: 23712879a0ce4cacadef55e00f3ea1ef
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1745622443204
+status: 3
+tags: []
+user_id: ziovi
