@@ -14,15 +14,15 @@ from typing import Dict, Any, Optional
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Set MLflow tracking URI and experiment name
-TRACKING_URI = "file:///" + os.path.abspath("mlruns")
+# Use environment variable for MLflow tracking URI
+TRACKING_URI = os.getenv("MLFLOW_TRACKING_URI", "http://localhost:5000")
 mlflow.set_tracking_uri(TRACKING_URI)
 mlflow.set_experiment("Fraud Detection")
 
 
 class BaseModel(ABC):
-    """Abstract Base Model for different ML algorithms."""
-    
+    """Abstract base class for ML models."""
+
     @abstractmethod
     def train(self, X_train: Any, y_train: Any) -> None:
         pass
@@ -32,14 +32,14 @@ class BaseModel(ABC):
         pass
 
     def evaluate(self, y_true: Any, y_pred: Any) -> Dict[str, float]:
-        """Compute model performance."""
+        """Evaluate model performance using classification metrics."""
         logger.info("Evaluating model performance.")
         try:
             metrics = {
                 "accuracy": accuracy_score(y_true, y_pred),
-                "precision": precision_score(y_true, y_pred, average="binary"),
-                "recall": recall_score(y_true, y_pred, average="binary"),
-                "f1_score": f1_score(y_true, y_pred, average="binary")
+                "precision": precision_score(y_true, y_pred, average="binary", zero_division=0),
+                "recall": recall_score(y_true, y_pred, average="binary", zero_division=0),
+                "f1_score": f1_score(y_true, y_pred, average="binary", zero_division=0)
             }
             logger.info(f"Evaluation metrics: {metrics}")
             return metrics
@@ -49,40 +49,40 @@ class BaseModel(ABC):
 
 
 class ModelWithGridSearch(BaseModel):
-    """Base class for models with hyperparameter tuning using GridSearchCV."""
-    
+    """Model with hyperparameter tuning using GridSearchCV."""
+
     def __init__(self, model: Any, param_grid: Dict[str, Any]):
         self.model = model
         self.param_grid = param_grid
         self.best_model = None
 
     def train(self, X_train: Any, y_train: Any) -> None:
-        logger.info(f"Tuning hyperparameters using GridSearchCV...")
+        logger.info("Tuning hyperparameters using GridSearchCV...")
         grid_search = GridSearchCV(self.model, self.param_grid, cv=3)
         grid_search.fit(X_train, y_train)
         self.best_model = grid_search.best_estimator_
-        logger.info(f"Best parameters found: {grid_search.best_params_}")
+        logger.info(f"Best parameters: {grid_search.best_params_}")
 
     def predict(self, X_test: Any) -> Any:
         if self.best_model is None:
             raise ValueError("Model has not been trained yet.")
         return self.best_model.predict(X_test)
 
-    def log_model_to_mlflow(self, X_train: Any, y_train: Any, X_test: Any, y_test: Any, model_name: str) -> None:
-        """Logs the model and evaluation metrics to MLflow."""
+    def log_model_to_mlflow(self, X_train: Any, y_train: Any, X_test: Any, y_test: Any, model_name: str) -> Dict[str, float]:
+        """Logs model and metrics to MLflow and returns metrics."""
         with mlflow.start_run():
-            logger.info(f"Logging {model_name} to MLflow.")
+            logger.info(f"Training and logging {model_name} to MLflow.")
             self.train(X_train, y_train)
             mlflow.sklearn.log_model(self.best_model, model_name)
 
-            # Predict and evaluate
             y_pred = self.predict(X_test)
             metrics = self.evaluate(y_test, y_pred)
-            
-            # Log metrics to MLflow
+
             if metrics:
                 mlflow.log_metrics(metrics)
-            logger.info(f"Metrics logged: {metrics}")
+
+            logger.info(f"Logged metrics: {metrics}")
+            return metrics
 
 
 class RandomForestModel(ModelWithGridSearch):
@@ -94,7 +94,7 @@ class RandomForestModel(ModelWithGridSearch):
 class LogisticRegressionModel(ModelWithGridSearch):
     def __init__(self):
         param_grid = {'C': [0.1, 1, 10]}
-        super().__init__(LogisticRegression(), param_grid)
+        super().__init__(LogisticRegression(max_iter=1000), param_grid)
 
 
 class SVMModel(ModelWithGridSearch):

@@ -150,3 +150,12 @@
 2025-04-26 02:13:54,050 - fraud_detection - INFO - Database initialized with path: data/creditcard_fraud.db
 2025-04-26 02:13:54,051 - fraud_detection - INFO - Fetching data with query: SELECT * FROM transactions
 2025-04-26 02:13:56,791 - fraud_detection - INFO - Fetched 284807 rows successfully.
+2025-04-26 14:20:58,673 - fraud_detection - INFO - Database initialized with path: data/creditcard_fraud.db
+2025-04-26 14:20:58,673 - fraud_detection - INFO - Fetching data with query: SELECT * FROM transactions
+2025-04-26 14:21:01,254 - fraud_detection - INFO - Fetched 284807 rows successfully.
+2025-04-26 14:44:02,353 - fraud_detection - INFO - Database initialized with path: data/creditcard_fraud.db
+2025-04-26 14:44:02,371 - fraud_detection - INFO - Fetching data with query: SELECT * FROM transactions
+2025-04-26 14:44:05,064 - fraud_detection - INFO - Fetched 284807 rows successfully.
+2025-04-26 14:47:50,033 - fraud_detection - INFO - Database initialized with path: data/creditcard_fraud.db
+2025-04-26 14:47:50,033 - fraud_detection - INFO - Fetching data with query: SELECT * FROM transactions
+2025-04-26 14:47:52,693 - fraud_detection - INFO - Fetched 284807 rows successfully.

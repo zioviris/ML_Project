@@ -1,0 +1,15 @@
+artifact_uri: file:///C:\Users\ziovi\fraud_detection\mlruns/884981610866631601/70a129177258419ab5d71d00b70d8578/artifacts
+end_time: 1745666489228
+entry_point_name: ''
+experiment_id: '884981610866631601'
+lifecycle_stage: active
+run_id: 70a129177258419ab5d71d00b70d8578
+run_name: capricious-shark-598
+run_uuid: 70a129177258419ab5d71d00b70d8578
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1745666461673
+status: 3
+tags: []
+user_id: ziovi

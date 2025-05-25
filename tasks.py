@@ -6,17 +6,22 @@ from models import get_model
 from database import Database
 import logging
 from sklearn.model_selection import train_test_split
+import os
+import mlflow
 
 
 # Setup logger
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-app = Celery('tasks', broker= "amqp://guest:guest@localhost:5672//")
+BROKER_URL = os.getenv("CELERY_BROKER_URL", "amqp://guest:guest@rabbitmq:5672//")
+app = Celery('tasks', broker=BROKER_URL)
 
 @app.task
 def train_model_and_log(model_type, query="SELECT * FROM transactions"):
     logger.info(f"Starting task to train {model_type} model.")
+    MLFLOW_URI = os.getenv("MLFLOW_TRACKING_URI", "http://mlflow:5000")
+    mlflow.set_tracking_uri(MLFLOW_URI)
     
     # Fetch data from database
     db = Database()

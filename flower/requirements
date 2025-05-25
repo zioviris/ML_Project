@@ -1,4 +1,4 @@
-mlflow
 rabbitmq
-celery
-eventlet
+celery>=5.3.0
+eventlet>=0.33.1
+mlflow>=2.0.0
