@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+mlflow
+scikit-learn
+numpy
+pydantic

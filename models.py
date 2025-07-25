@@ -9,6 +9,8 @@ import mlflow.sklearn
 import logging
 import os
 from typing import Dict, Any, Optional
+from mlflow.tracking import MlflowClient
+from mlflow.exceptions import RestException
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -70,19 +72,99 @@ class ModelWithGridSearch(BaseModel):
 
     def log_model_to_mlflow(self, X_train: Any, y_train: Any, X_test: Any, y_test: Any, model_name: str) -> Dict[str, float]:
         """Logs model and metrics to MLflow and returns metrics."""
-        with mlflow.start_run():
+        client = MlflowClient()  # <-- Added MLflow client instance
+
+        with mlflow.start_run() as run:
             logger.info(f"Training and logging {model_name} to MLflow.")
             self.train(X_train, y_train)
-            mlflow.sklearn.log_model(self.best_model, model_name)
-
-            y_pred = self.predict(X_test)
+            y_pred = self.predict(X_test)  # <-- predict before log_model for metric calculation
             metrics = self.evaluate(y_test, y_pred)
 
             if metrics:
                 mlflow.log_metrics(metrics)
 
+            mlflow.sklearn.log_model(self.best_model, artifact_path="model")  # <-- artifact_path to "model"
+
             logger.info(f"Logged metrics: {metrics}")
+
+            run_id = run.info.run_id
+            model_uri = f"runs:/{run_id}/model"  # <-- "model" to match artifact_path
+            try:
+                client.create_registered_model(model_name)  # <-- create new registered model
+                logger.info(f"Registered new model: {model_name}")
+            except RestException:
+                logger.info(f"Model {model_name} already registered.")
+
+            registered_model = client.create_model_version(name=model_name, source=model_uri, run_id=run_id)  # <-- Create new model version
+            logger.info(f"Registered model {registered_model.name} v{registered_model.version}")
+
+            # Champion/Challenger logic starts here
+            try:
+                current_prod = client.get_latest_versions(model_name, stages=["Production"])[0]
+                current_metrics = client.get_run(current_prod.run_id).data.metrics
+                current_f1 = current_metrics.get("f1_score", 0)
+                new_f1 = metrics.get("f1_score", 0)
+
+                logger.info(f"Current Production F1: {current_f1} | New F1: {new_f1}")
+
+                if new_f1 > current_f1:
+                    client.transition_model_version_stage(
+                        name=model_name,
+                        version=registered_model.version,
+                        stage="Production",
+                        archive_existing_versions=True
+                    )
+                    logger.info("✅ Promoted new model to Production.")
+                else:
+                    logger.info("ℹ️ New model NOT promoted. Existing Production model is better.")
+            except IndexError:
+                # No Production model exists yet
+                client.transition_model_version_stage(
+                    name=model_name,
+                    version=registered_model.version,
+                    stage="Production"
+                )
+                logger.info("✅ First model promoted to Production.")
+
             return metrics
+    
+    @staticmethod
+    def promote_champion_model(experiment_name: str, model_name: str):
+        """Promote best model based on f1_score to Production."""
+        logger.info("Selecting champion model based on best F1 score.")
+        client = MlflowClient()
+        experiment = client.get_experiment_by_name(experiment_name)
+
+        if experiment is None:
+            logger.warning("Experiment not found.")
+            return
+
+        runs = client.search_runs(experiment_ids=[experiment.experiment_id], order_by=["metrics.f1_score DESC"])
+
+        if not runs:
+            logger.warning("No runs found.")
+            return
+
+        best_run = runs[0]
+        best_run_id = best_run.info.run_id
+
+        best_version = None
+        for mv in client.search_model_versions(f"name='{model_name}'"):
+            if mv.run_id == best_run_id:
+                best_version = mv.version
+                break
+
+        if best_version:
+            logger.info(f"Promoting version {best_version} of model '{model_name}' to Production.")
+            client.transition_model_version_stage(
+                name=model_name,
+                version=best_version,
+                stage="Production",
+                archive_existing_versions=True
+            )
+            client.set_model_version_tag(model_name, best_version, "champion", "true")
+        else:
+            logger.warning("No matching model version found to promote.")
 
 
 class RandomForestModel(ModelWithGridSearch):

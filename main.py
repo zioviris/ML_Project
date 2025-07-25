@@ -39,11 +39,6 @@ def get_fraud_transactions():
     df = query_db("SELECT * FROM transactions WHERE Class = 1 LIMIT 100")
     return df.to_dict(orient="records")
 
-@app.get("/add-task/")  # For testing basic Celery task
-def add_task(x: int, y: int):
-    task = add.delay(x, y)
-    return {"task_id": task.id, "status": "Task submitted!"}
-
 class TrainRequest(BaseModel):
     model_type: str  # Expecting 'random_forest', 'logistic_regression', or 'svm'
 
