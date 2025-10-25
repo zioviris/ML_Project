@@ -5,15 +5,15 @@ def setup_logger():
     logger = logging.getLogger("fraud_detection")
     logger.setLevel(logging.DEBUG)
 
-    # Create a console handler for logging to the console
-    console_handler = logging.StreamHandler()
-    console_handler.setLevel(logging.INFO)  # You can change this to DEBUG for more details
 
-    # Create a file handler for logging to a file
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.INFO)  #  DEBUG for more details
+
+
     file_handler = logging.FileHandler("fraud_detection.log")
     file_handler.setLevel(logging.DEBUG)
 
-    # Define log format
+   
     formatter = logging.Formatter(
         "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
     )

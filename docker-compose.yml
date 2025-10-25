@@ -10,6 +10,8 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
+    networks:
+      - fraudnet
 
   flower:
     image: mher/flower
@@ -20,6 +22,8 @@ services:
       - "5555:5555"
     environment:
       - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
+    networks:
+      - fraudnet
 
   backend:
     build: .
@@ -34,6 +38,8 @@ services:
       - MLFLOW_TRACKING_URI=http://mlflow:5000
     volumes:
       - mlruns:/app/mlruns
+    networks:
+      - fraudnet
 
   celery_worker:
     build: .
@@ -46,8 +52,9 @@ services:
       - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
       - MLFLOW_TRACKING_URI=http://mlflow:5000
     volumes:
-    - mlruns:/app/mlruns
-
+      - mlruns:/app/mlruns
+    networks:
+      - fraudnet
 
   mlflow:
     build: ./mlflow
@@ -58,6 +65,11 @@ services:
       - mlruns:/app/mlruns
     environment:
       - MLFLOW_BACKEND_STORE_URI=postgresql://mlflow:mlflow@postgres:5432/mlflow
+      - MLFLOW_DEFAULT_ARTIFACT_ROOT=/app/mlruns
+    depends_on:
+      - postgres
+    networks:
+      - fraudnet
 
   postgres:
     image: postgres
@@ -70,19 +82,22 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - fraudnet
 
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@example.com
-      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_DEFAULT_EMAIL: zioviris@hotmail.com
+      PGADMIN_DEFAULT_PASSWORD: Botvinnik
     ports:
       - "5050:80"
     depends_on:
       - postgres
+    networks:
+      - fraudnet
 
-  
   api:
     build:
       context: ./api
@@ -93,7 +108,12 @@ services:
       - MLFLOW_TRACKING_URI=http://mlflow:5000
     depends_on:
       - mlflow
+    networks:
+      - fraudnet
 
 volumes:
   mlruns:
   pgdata:
+
+networks:
+  fraudnet:

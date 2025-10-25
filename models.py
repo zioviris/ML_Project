@@ -12,18 +12,17 @@ from typing import Dict, Any, Optional
 from mlflow.tracking import MlflowClient
 from mlflow.exceptions import RestException
 
-# Setup logging
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Use environment variable for MLflow tracking URI
-TRACKING_URI = os.getenv("MLFLOW_TRACKING_URI", "http://localhost:5000")
+TRACKING_URI = os.getenv("MLFLOW_TRACKING_URI", "http://mlflow:5000")
 mlflow.set_tracking_uri(TRACKING_URI)
 mlflow.set_experiment("Fraud Detection")
 
 
 class BaseModel(ABC):
-    """Abstract base class for ML models."""
+    
 
     @abstractmethod
     def train(self, X_train: Any, y_train: Any) -> None:
@@ -34,7 +33,7 @@ class BaseModel(ABC):
         pass
 
     def evaluate(self, y_true: Any, y_pred: Any) -> Dict[str, float]:
-        """Evaluate model performance using classification metrics."""
+        
         logger.info("Evaluating model performance.")
         try:
             metrics = {
@@ -114,9 +113,9 @@ class ModelWithGridSearch(BaseModel):
                         stage="Production",
                         archive_existing_versions=True
                     )
-                    logger.info("✅ Promoted new model to Production.")
+                    logger.info("Promoted new model to Production.")
                 else:
-                    logger.info("ℹ️ New model NOT promoted. Existing Production model is better.")
+                    logger.info("ℹNew model NOT promoted. Existing Production model is better.")
             except IndexError:
                 # No Production model exists yet
                 client.transition_model_version_stage(
@@ -124,7 +123,7 @@ class ModelWithGridSearch(BaseModel):
                     version=registered_model.version,
                     stage="Production"
                 )
-                logger.info("✅ First model promoted to Production.")
+                logger.info("First model promoted to Production.")
 
             return metrics
     

@@ -10,7 +10,7 @@ import os
 import mlflow
 
 
-# Setup logger
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -23,7 +23,7 @@ def train_model_and_log(model_type, query="SELECT * FROM transactions"):
     MLFLOW_URI = os.getenv("MLFLOW_TRACKING_URI", "http://mlflow:5000")
     mlflow.set_tracking_uri(MLFLOW_URI)
     
-    # Fetch data from database
+
     db = Database()
     data = db.fetch_data(query)
     if data is None or 'Class' not in data.columns:
@@ -36,13 +36,13 @@ def train_model_and_log(model_type, query="SELECT * FROM transactions"):
     X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.33, random_state=42)
 
-    # Get the model based on the model_type
+ 
     model = get_model(model_type)
     if model is None:
         logger.error(f"Invalid model type: {model_type}")
         return {"error": "Invalid model type"}
 
-    # Train and log model using MLflow
+
     try:
         metrics = model.log_model_to_mlflow(X_train, y_train, X_test, y_test, model_type)
         model.log_model_to_mlflow(X_train, y_train, X_test, y_test, model_type) 

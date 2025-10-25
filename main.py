@@ -24,7 +24,7 @@ def read_root():
 
 @app.get("/transactions")
 def get_all_transactions():
-    df = query_db("SELECT * FROM transactions LIMIT 100")  # Limit to avoid large responses
+    df = query_db("SELECT * FROM transactions LIMIT 100") 
     return df.to_dict(orient="records")
 
 @app.get("/transaction/{transaction_id}")
